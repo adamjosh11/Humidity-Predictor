@@ -1,0 +1,5 @@
+﻿<Properties StartupConfiguration="{937FA072-2C96-4543-9B15-EE17ABC8262C}|https">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.CapstoneServer PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.ItemProperties.BlazorApp FirstBuild="True" />
+</Properties>
