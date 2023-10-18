@@ -1,0 +1,27 @@
+﻿<Properties StartupConfiguration="{51B45E8F-2559-4E21-94E0-E189BD9D7DDC}|https">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CapstoneUI/Pages/Counter.razor">
+    <Files>
+      <File FileName="CapstoneUI/Pages/Counter.razor" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="CapstoneUI" expanded="True">
+            <Node name="CapstoneUI" expanded="True">
+              <Node name="Pages" expanded="True">
+                <Node name="Counter.razor" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.CapstoneUI PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+</Properties>
