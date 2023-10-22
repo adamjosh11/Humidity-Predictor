@@ -20,4 +20,9 @@
   <ItemGroup>
     <Folder Include="Demo\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="firebase-SDK.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

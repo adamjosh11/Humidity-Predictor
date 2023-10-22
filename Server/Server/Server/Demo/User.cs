@@ -7,7 +7,7 @@ namespace Server.Demo
 	public class User : IFirebaseEntity
 	{
 		[FirestoreProperty]
-		public string Id { get; set; }
+		public string ID { get; set; }
         [FirestoreProperty]
         public DateTime DateTime { get; set; }
         [FirestoreProperty]
@@ -19,11 +19,15 @@ namespace Server.Demo
 
         public User(DateTime dateTime, float humidity, float temperature, Boolean rained)
 		{
-			Id = Guid.NewGuid().ToString("N");
+			ID = Guid.NewGuid().ToString("N");
 			DateTime = dateTime;
 			Humidity = humidity;
 			Temperature = temperature;
 			Rained = rained;
+		}
+		public User()
+		{
+
 		}
 	}
 }

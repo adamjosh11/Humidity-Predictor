@@ -1,4 +1,32 @@
 ﻿<Properties StartupConfiguration="{AB698515-2602-44B1-970D-F6C8A981C066}|https">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Server/Demo/FireStoreProvider.cs">
+    <Files>
+      <File FileName="Server/Controllers/WeatherForecastController.cs" Line="30" Column="20" />
+      <File FileName="Server/Demo/FireStoreProvider.cs" Line="15" Column="27" />
+      <File FileName="Server/Demo/EmptyInterface.cs" Line="7" Column="3" />
+      <File FileName="Server/Demo/Starter.cs" Line="40" Column="95" />
+      <File FileName="Server/Demo/User.cs" Line="20" Column="89" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Server" expanded="True">
+            <Node name="Server">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Demo">
+                <Node name="FireStoreProvider.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.Server FirstBuild="True" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Server PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

@@ -3,7 +3,7 @@ namespace Server.Demo
 {
 	public interface IFirebaseEntity
 	{
-		public string Id { get; set; }
+		public string ID { get; set; }
 	}
 }
 

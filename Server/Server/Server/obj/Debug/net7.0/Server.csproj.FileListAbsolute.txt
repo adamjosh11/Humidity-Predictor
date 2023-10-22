@@ -50,3 +50,5 @@
 /Users/joshadams/CS6010/CapStone/Rainfall-Predictor/Server/Server/Server/bin/Debug/net7.0/Microsoft.Bcl.AsyncInterfaces.dll
 /Users/joshadams/CS6010/CapStone/Rainfall-Predictor/Server/Server/Server/bin/Debug/net7.0/Newtonsoft.Json.dll
 /Users/joshadams/CS6010/CapStone/Rainfall-Predictor/Server/Server/Server/bin/Debug/net7.0/System.Linq.Async.dll
+/Users/joshadams/CS6010/CapStone/Rainfall-Predictor/Server/Server/Server/bin/Debug/net7.0/firebase-SDK.json
+/Users/joshadams/CS6010/CapStone/Rainfall-Predictor/Server/Server/Server/bin/Debug/net7.0/Authentication.json

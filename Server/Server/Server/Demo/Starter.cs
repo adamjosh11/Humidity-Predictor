@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Reflection;
 using Google.Cloud.Firestore;
 using Google.Cloud.Firestore.V1;
+using static Google.Cloud.Firestore.V1.StructuredQuery.Types;
 
 namespace Server.Demo
 {
@@ -11,18 +13,25 @@ namespace Server.Demo
 
 		public Starter()
 		{
-            var jsonString = File.ReadAllText("/ Users/joshadams/CS6010/CapStone/Rainfall - Predictor/Server/firebase-SDK.json");
+			//var dummy = Directory.GetCurrentDirectory();
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Authentication.json");
+            var jsonString = File.ReadAllText(path);
             var builder = new FirestoreClientBuilder { JsonCredentials = jsonString };
-            FirestoreDb db = FirestoreDb.Create("RainFallCapstone", builder.Build());
-			_firestoreProvider = new FirestoreProvider(db);
+            FirestoreDb db = FirestoreDb.Create("rainfallcapstone", builder.Build());
+            //var db = new FirestoreDbBuilder
+            //{
+            //    ProjectId = "RainFallCapstoneeeeeee",
+            //    JsonCredentials = jsonString
+            //}.Build();
+            _firestoreProvider = new FirestoreProvider(db);
 			CancellationTokenSource source = new CancellationTokenSource();
 			_token = source.Token;
         }
 
-		public async void Add(DateTime dateTime, float humidity, float temperature, Boolean rained)
+		public async void Add(User user)
 		{
-			var user = new User(dateTime, humidity, temperature, rained);
-			await _firestoreProvider.AddOrUpdate(user, _token);
+			user.ID = Guid.NewGuid().ToString("N");
+            await _firestoreProvider.AddOrUpdate(user, _token);
 		}
 
 		public async Task<User> Get(string id)
