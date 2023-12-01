@@ -7,10 +7,6 @@ namespace Server.Controllers;
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
-    //private static readonly string[] Summaries = new[]
-    //{
-    //    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    //};
 
     private readonly ILogger<WeatherForecastController> _logger;
     private readonly Starter _starter;
@@ -21,27 +17,23 @@ public class WeatherForecastController : ControllerBase
         _starter = starter;
     }
 
-    //[HttpGet(Name = "GetWeatherForecast")]
-    //public IEnumerable<WeatherForecast> Get()
-    //{
-    //    return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-    //    {
-    //        Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-    //        TemperatureC = Random.Shared.Next(-20, 55),
-    //        Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-    //    })
-    //    .ToArray();
-    //}
     [HttpPost]
-    public User Upsert(User user)
+    public ClimateData Upsert(ClimateData user)
     {
         _starter.Add(user);
         return user;
     }
     [HttpGet]
-    public Task<IReadOnlyCollection<User>> GetUsers()
+    [Route("GetAll")]
+    public Task<IReadOnlyCollection<ClimateData>> GetUsers()
     {
         return _starter.GetAll();
+    }
+    [HttpGet]
+    [Route("GetLatest")]
+    public Task<ClimateData?> GetLatest()
+    {
+        return _starter.GetLatest();
     }
 }
 

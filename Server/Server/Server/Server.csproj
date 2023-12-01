@@ -16,9 +16,13 @@
 
   <ItemGroup>
     <None Remove="Demo\" />
+    <None Remove="DataModels\" />
+    <None Remove="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Demo\" />
+    <Folder Include="DataModels\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="firebase-SDK.json">

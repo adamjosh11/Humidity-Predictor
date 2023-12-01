@@ -15,7 +15,9 @@ public class FirestoreProvider
         public async Task AddOrUpdate<T>(T entity, CancellationToken ct) where T : IFirebaseEntity
         {
             var document = _fireStoreDb.Collection(typeof(T).Name).Document(entity.ID);
-            await document.SetAsync(entity, cancellationToken: ct);
+            var test1 = document.ToString();
+            var snapshot = await document.SetAsync(entity, cancellationToken: ct);
+            var test2 = snapshot.ToString();
         }
 
         public async Task<T> Get<T>(string id, CancellationToken ct) where T : IFirebaseEntity
@@ -23,6 +25,13 @@ public class FirestoreProvider
             var document = _fireStoreDb.Collection(typeof(T).Name).Document(id);
             var snapshot = await document.GetSnapshotAsync(ct);
             return snapshot.ConvertTo<T>();
+        }
+
+        public async Task<T?> GetLatest<T>(CancellationToken ct) where T : IFirebaseEntity
+        {
+            var document = _fireStoreDb.Collection(typeof(T).Name).OrderByDescending("DateTime").Limit(1);
+            var snapshot = await document.GetSnapshotAsync(ct);
+            return snapshot.Documents.Select(x => x.ConvertTo<T>()).FirstOrDefault();
         }
 
         public async Task<IReadOnlyCollection<T>> GetAll<T>(CancellationToken ct) where T : IFirebaseEntity

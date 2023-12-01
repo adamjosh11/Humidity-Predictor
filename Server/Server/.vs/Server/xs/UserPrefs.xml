@@ -1,32 +1,41 @@
 ﻿<Properties StartupConfiguration="{AB698515-2602-44B1-970D-F6C8A981C066}|https">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Server/Demo/FireStoreProvider.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Server/compose.yaml">
     <Files>
-      <File FileName="Server/Controllers/WeatherForecastController.cs" Line="30" Column="20" />
-      <File FileName="Server/Demo/FireStoreProvider.cs" Line="15" Column="27" />
-      <File FileName="Server/Demo/EmptyInterface.cs" Line="7" Column="3" />
-      <File FileName="Server/Demo/Starter.cs" Line="40" Column="95" />
-      <File FileName="Server/Demo/User.cs" Line="20" Column="89" />
+      <File FileName="Server/Controllers/WeatherForecastController.cs" Line="1" Column="1" />
+      <File FileName="Server/WeatherForecast.cs" />
+      <File FileName="Server/Program.cs" Line="5" Column="35" />
+      <File FileName="Server/appsettings.json" />
+      <File FileName="Server/Controllers/PredictionController.cs" Line="34" Column="29" />
+      <File FileName="Server/Controllers/ClimateDataController.cs" Line="41" Column="10" />
+      <File FileName="Server/.firebaserc" />
+      <File FileName="Server/README.Docker.md" Line="1" Column="1" />
+      <File FileName="Server/DataModels/ClimateData.cs" Line="24" Column="30" />
+      <File FileName="Server/DataModels/EmptyClass.cs" Line="21" Column="33" />
+      <File FileName="Server/DataModels/IFirebaseEntity.cs" Line="1" Column="1" />
+      <File FileName="Server/Services/Starter.cs" Line="56" Column="59" />
+      <File FileName="Server/Services/FireStoreProvider.cs" Line="1" Column="1" />
+      <File FileName="Server/compose.yaml" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Server" expanded="True">
+          <Node name="Server">
             <Node name="Server">
               <Node name="Controllers" expanded="True" />
-              <Node name="Demo">
-                <Node name="FireStoreProvider.cs" selected="True" />
-              </Node>
+              <Node name="DataModels" expanded="True" />
+              <Node name="Services" expanded="True" />
+              <Node name="compose.yaml" selected="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Server PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Server PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
 </Properties>
