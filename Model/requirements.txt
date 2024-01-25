@@ -1,0 +1,8 @@
+numpy==1.23.5
+pandas==1.5.3
+torch==2.1.1
+Flask==2.2.5
+Flask-RESTful==0.3.10
+gunicorn==21.2.0
+requests~=2.31.0
+scikit-learn~=1.2.2

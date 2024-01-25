@@ -1,0 +1,75 @@
+﻿@page "/Inputs"
+@using CapstoneUI.Data
+@using System.Text.Json
+
+
+
+<PageTitle>Poster</PageTitle>
+
+
+<h2>Date</h2>
+
+<input class="date-input" value=@dateTime.ToString() type="text" />
+
+<h2>Temp</h2>
+
+<input class="temp-input" placeholder="Temp" type="text" @bind="@temperature" @oninput="@(ui => {temperature = (string) ui.Value;})" />
+
+<h2>Humidity</h2>
+
+<input class="humidity-input" placeholder="Humidity" type="text" @bind="@humidity" @oninput="@(ui => {humidity = (string) ui.Value;})" />
+
+<h2>Rained</h2>
+
+<input class="rained-input" placeholder="Rained" type="text" @bind="@rained" @oninput="@(ui => {rained = (string) ui.Value;})" />
+
+<h3>Submit</h3>
+
+<button class="btn btn-primary" @onclick="SubmitButtonClick">Submit</button>
+
+<p role="status">Completed Text: @completedText</p>
+
+@functions {
+    HttpClient httpClient = new HttpClient();
+
+    DateTime dateTime = DateTime.Now;
+
+    string id = "SomeID";
+    string humidity = "";
+    string temperature = "";
+    string rained = "";
+    string completedText = "NOTHING";
+
+    public async Task PostData(RainfallData rainfallData)
+    {
+        await httpClient.PostAsJsonAsync("https://localhost:5000/weatherforecast", rainfallData);
+    }
+
+    private void SubmitButtonClick()
+    {
+
+        //make this the actual API later
+        //var request = new HttpRequestMessage(HttpMethod.Get, "SomeURL");
+        //var response = request
+        RainfallData rainfallData = new RainfallData
+        {
+            ID = "This Field is Useless",
+            DateTime = dateTime.ToUniversalTime(),
+            Humidity = float.Parse(humidity),
+            Temperature = float.Parse(temperature),
+        };
+        Task.Run(() => PostData(rainfallData));
+        //PostData(rainfallData).Wait();
+        string jsonString = JsonSerializer.Serialize(rainfallData);
+        completedText = jsonString;
+    }
+}
+
+@*{
+      "id": "string",
+      "dateTime": "2023-10-30T15:15:14.983Z",
+      "humidity": 0,
+      "temperature": 0,
+      "rained": true
+    }*@
+

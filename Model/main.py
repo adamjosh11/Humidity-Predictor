@@ -1,44 +1,157 @@
 # This is a sample Python script.
+import json
+from datetime import datetime
 
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 import numpy as np
 import pandas as pd
-import pycaret
-from pycaret.classification import *
+import torch
+import torch.nn as nn
 import requests
+from sklearn.preprocessing import MinMaxScaler
+from flask import Flask, request, redirect
+from flask_restful import Resource, Api
+# from flask_cors import CORS
+import os
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+app = Flask(__name__)
+# cors = CORS(app, resources={r"*": {"origins": "*"}})
+api = Api(app)
+predicted_humidity = 101.99
+
+
+def getPrediction():
+    if predicted_humidity == 101.99:
+        return "model not working"
+    elif predicted_humidity <= 55:
+        return f"predicted humidity is {predicted_humidity}: dry and comfortable"
+    elif 55 < predicted_humidity < 65:
+        return f"predicted humidity is {predicted_humidity}: becoming sticky"
+    else:
+        return f"predicted humidity is {predicted_humidity}: lots of moisture in the air"
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    df = pd.read_csv("historic_weather_data.csv")
-    pd.set_option('display.max_columns', None)
-    df = df['DailyAverageRelativeHumidity', 'DailyPrecipitation', ]
-    print(df.columns.tolist())
-    # token = "FNDXuekgrDWrywqFnFKfLuAQBYQdPgbV"
-    # creds = dict(token=token)
-    # dtype = 'locations'
-    # url = "https://www.ncei.noaa.gov/cdo-web/api/v2/"
-    # response = requests.get(url, dtype, headers=creds)
-    # print(response.status_code)
-    # print(response.json())
+    url = "https://capstone-api-exlxxpyksq-uc.a.run.app/weatherforecast/getall"
+    response = requests.get(url)
+    response_json = response.json()
+    with open("data.json", "w") as outfile:
+        json.dump(response_json, outfile)
+    df = pd.read_json("data.json", convert_dates=True)
+    df = df.drop(columns=['id', 'temperature'])
+    df['dates'] = df['dateTime'].apply(lambda x: x.toordinal())
 
-    # d = {'Temperature': [50, 60, 80, 100, 40], 'Humidity': [23, 40, 60, 30, 10], 'Rained': [1, 1, 0, 0, 1]}
-    # for i in range(100):
-    #     d['Temperature'].append(i + 10)
-    #     d['Humidity'].append(i)
-    #     d['Rained'].append(i % 2)
-    # print(d)
-    # df = pd.DataFrame(d)
-    # print(df.shape)
-    # exp_clf101 = setup(df, target='Rained', session_id=123)
-    # print(compare_models())
-    # dt = create_model('nb')
-    # print(dt)
-    #print(df)
+    y = df['humidity'].values.astype(float)
+    test_size = 12
+    train_set = y[:-test_size]
+    test_set = y[-test_size:]
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    scaler = MinMaxScaler(feature_range=(-1, 1))
+
+    train_norm = scaler.fit_transform(train_set.reshape(-1, 1))
+
+    train_norm = torch.FloatTensor(train_norm).view(-1)
+
+    window_size = 1
+
+
+    def input_data(seq, ws):
+        out = []
+        L = len(seq)
+        for i in range(L - ws):
+            window = seq[i:i + ws]
+            label = seq[i + ws:i + ws + 1]
+            out.append((window, label))
+        return out
+
+
+    train_data = input_data(train_norm, window_size)
+    print(len(train_data))
+    print(train_data[0])
+
+
+    class LSTMnetwork(nn.Module):
+        def __init__(self, input_size=1, hidden_size=100, output_size=1):
+            super().__init__()
+            self.hidden_size = hidden_size
+
+            self.lstm = nn.LSTM(input_size, hidden_size)
+
+            self.linear = nn.Linear(hidden_size, output_size)
+
+            self.hidden = (torch.zeros(1, 1, self.hidden_size), torch.zeros(1, 1, self.hidden_size))
+
+        def forward(self, seq):
+            lstm_out, self.hidden = self.lstm(
+                seq.view(len(seq), 1, -1), self.hidden)
+            pred = self.linear(lstm_out.view(len(seq), -1))
+            return pred[-1]
+
+
+    torch.manual_seed(42)
+
+    model = LSTMnetwork()
+
+    criterion = nn.MSELoss()
+
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+
+    print(model)
+
+    epochs = 100
+
+    import time
+
+    start_time = time.time()
+
+    for epoch in range(epochs):
+        for seq, y_train in train_data:
+            optimizer.zero_grad()
+            model.hidden = (torch.zeros(1, 1, model.hidden_size),
+                            torch.zeros(1, 1, model.hidden_size))
+
+            y_pred = model(seq)
+
+            loss = criterion(y_pred, y_train)
+            loss.backward()
+            optimizer.step()
+
+            print(f'Epoch: {epoch + 1:2} Loss: {loss.item():10.8f}')
+    print(f'\nDuration: {time.time() - start_time:.0f} seconds')
+
+    future = 1
+
+    preds = train_norm[-window_size:].tolist()
+
+    model.eval()
+
+    for i in range(future):
+        seq = torch.FloatTensor(preds[-window_size:])
+        with torch.no_grad():
+            model.hidden = (torch.zeros(1, 1, model.hidden_size),
+                            torch.zeros(1, 1, model.hidden_size))
+            preds.append(model(seq).item())
+    print(preds[window_size:])
+
+    true_predictions = scaler.inverse_transform(np.array(preds[window_size:]).reshape(-1, 1))
+    # print(type(true_predictions[0][0]))
+    predicted_humidity = true_predictions[0][0]
+    print(predicted_humidity)
+
+    value = getPrediction()
+
+    print(value)
+
+    print(type(value))
+
+    data = {"pred": value}
+
+    print(data)
+
+    print(type(data))
+
+    r = requests.post('https://capstone-api-exlxxpyksq-uc.a.run.app/prediction', json={"pred": value})
+
+    print(r)

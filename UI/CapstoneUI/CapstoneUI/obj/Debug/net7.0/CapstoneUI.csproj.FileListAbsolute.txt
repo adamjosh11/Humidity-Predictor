@@ -30,3 +30,5 @@
 /Users/joshadams/CS6010/CapStone/Rainfall-Predictor/UI/CapstoneUI/CapstoneUI/obj/Debug/net7.0/CapstoneUI.pdb
 /Users/joshadams/CS6010/CapStone/Rainfall-Predictor/UI/CapstoneUI/CapstoneUI/obj/Debug/net7.0/CapstoneUI.genruntimeconfig.cache
 /Users/joshadams/CS6010/CapStone/Rainfall-Predictor/UI/CapstoneUI/CapstoneUI/obj/Debug/net7.0/ref/CapstoneUI.dll
+/Users/joshadams/CS6010/CapStone/Rainfall-Predictor/UI/CapstoneUI/CapstoneUI/bin/Debug/net7.0/Newtonsoft.Json.dll
+/Users/joshadams/CS6010/CapStone/Rainfall-Predictor/UI/CapstoneUI/CapstoneUI/obj/Debug/net7.0/CapstoneUI.csproj.CopyComplete

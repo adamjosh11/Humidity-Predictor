@@ -1,0 +1,86 @@
+﻿@using CapstoneUI.Data
+@using Newtonsoft.Json;
+
+<PageTitle>Getters</PageTitle>
+
+<h1>Data</h1>
+
+<p role="status">This component is for receiving and displaying the latest data</p>
+
+<h2></h2>
+
+<input class="temp-input" placeholder="Temperature" type="text" @bind="temperature" @oninput="@(ui => {temperature = (string) ui.Value;})" />
+
+<h2></h2>
+
+<input class="humidity-input" placeholder="Humidity" type="text" @bind="humidity" @oninput="@(ui => {humidity = (string) ui.Value;})" />
+
+<h2></h2>
+
+<input class="dateTime-input" placeholder="Date" type="text" @bind="dateTime" @oninput="@(ui => {dateTime = (string) ui.Value;})" />
+
+
+<h2></h2>
+
+<button class="btn btn-primary" @onclick="GetLatest">Get Data</button>
+
+<h2>Prediction</h2>
+
+<p>@prediction</p>
+
+<h2></h2>
+
+<button class="btn btn-primary" @onclick="GetPrediction">Get Prediction</button>
+
+
+
+
+@functions {
+    string prediction = "Click to get tomorrows prediction";
+    string humidity = "";
+    string temperature = "";
+    string dateTime = "";
+    HttpClient httpClient = new HttpClient();
+
+    public async Task<IEnumerable<RainfallData>> GetAllFromAPI()
+    {
+        using HttpResponseMessage response = await httpClient.GetAsync("https://capstone-api-exlxxpyksq-uc.a.run.app/weatherforecast/getall");
+        string jsonResponse = await response.Content.ReadAsStringAsync();
+        return JsonConvert.DeserializeObject<IEnumerable<RainfallData>>(jsonResponse) ?? new List<RainfallData>();
+    }
+
+    public async Task<RainfallData> GetLatestFromAPI()
+    {
+        using HttpResponseMessage response = await httpClient.GetAsync("https://capstone-api-exlxxpyksq-uc.a.run.app/weatherforecast/getlatest");
+        string jsonResponse = await response.Content.ReadAsStringAsync();
+        return JsonConvert.DeserializeObject<RainfallData>(jsonResponse);
+    }
+
+    public async Task<PredictionData> GetLatestPrediction()
+    {
+        using HttpResponseMessage response = await httpClient.GetAsync("https://capstone-api-exlxxpyksq-uc.a.run.app/prediction/getlatest");
+        string jsonResponse = await response.Content.ReadAsStringAsync();
+        return JsonConvert.DeserializeObject<PredictionData>(jsonResponse);
+    }
+
+    private void GetAll()
+    {
+        var all = Task.Run(() => GetAllFromAPI()).Result;
+    }
+
+    private void GetLatest()
+    {
+        var latest = Task.Run(() => GetLatestFromAPI()).Result;
+        temperature = latest.Temperature.ToString();
+        humidity = latest.Humidity.ToString();
+        DateTime mountain = TimeZoneInfo.ConvertTimeFromUtc(latest.DateTime, TimeZoneInfo.Local);
+        dateTime = mountain.ToString();
+    }
+
+    private void GetPrediction()
+    {
+        var latest = Task.Run(() => GetLatestPrediction()).Result;
+        prediction = latest.pred;    
+    }
+}
+

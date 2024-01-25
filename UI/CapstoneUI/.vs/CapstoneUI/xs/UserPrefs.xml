@@ -1,16 +1,41 @@
 ﻿<Properties StartupConfiguration="{51B45E8F-2559-4E21-94E0-E189BD9D7DDC}|https">
-  <MonoDevelop.Ide.Workbench ActiveDocument="CapstoneUI/Pages/Counter.razor">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CapstoneUI/Properties/launchSettings.json">
     <Files>
-      <File FileName="CapstoneUI/Pages/Counter.razor" Line="1" Column="1" />
+      <File FileName="CapstoneUI/Pages/Counter.razor" Line="3" Column="31" />
+      <File FileName="CapstoneUI/Pages/Index.razor" Line="8" Column="1" />
+      <File FileName="CapstoneUI/Pages/Inputs.razor" Line="16" Column="4" />
+      <File FileName="CapstoneUI/Pages/FetchData.razor" Line="1" Column="1" />
+      <File FileName="CapstoneUI/Pages/GetComponent.razor" Line="39" Column="59" />
+      <File FileName="CapstoneUI/Pages/_Host.cshtml" Line="1" Column="1" />
+      <File FileName="CapstoneUI/Program.cs" Line="1" Column="1" />
+      <File FileName="CapstoneUI/App.razor" Line="1" Column="1" />
+      <File FileName="CapstoneUI/_Imports.razor" Line="1" Column="1" />
+      <File FileName="CapstoneUI/appsettings.json" />
+      <File FileName="CapstoneUI/Data/WeatherForecast.cs" Line="1" Column="1" />
+      <File FileName="CapstoneUI/Data/WeatherForecastService.cs" Line="1" Column="1" />
+      <File FileName="CapstoneUI/Shared/MainLayout.razor" Line="1" Column="1" />
+      <File FileName="CapstoneUI/Shared/NavMenu.razor" Line="1" Column="1" />
+      <File FileName="CapstoneUI/Data/RainfallData.cs" Line="9" Column="47" />
+      <File FileName="CapstoneUI/Shared/SurveyPrompt.razor" />
+      <File FileName="CapstoneUI/Services/RainFallService.cs" />
+      <File FileName="CapstoneUI/Pages/Error.cshtml" Line="1" Column="1" />
+      <File FileName="CapstoneUI/Properties/launchSettings.json" Line="1" Column="1" />
+      <File FileName="CapstoneUI/Data/EmptyClass.cs" Line="5" Column="3" />
+      <File FileName="CapstoneUI/compose.yaml" Line="1" Column="1" />
+      <File FileName="CapstoneUI/Dockerfile" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="CapstoneUI" expanded="True">
             <Node name="CapstoneUI" expanded="True">
-              <Node name="Pages" expanded="True">
-                <Node name="Counter.razor" selected="True" />
+              <Node name="Data" expanded="True" />
+              <Node name="Pages" expanded="True" />
+              <Node name="Properties" expanded="True">
+                <Node name="launchSettings.json" selected="True" />
               </Node>
+              <Node name="Services" expanded="True" />
+              <Node name="Shared" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -18,10 +43,10 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.CapstoneUI PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
 </Properties>
