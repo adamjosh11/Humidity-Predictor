@@ -10,40 +10,22 @@ void setup() {
   
 }
 void loop() {
+  //Collect the climate data
   float temp = dht.readTemperature(true);
   float humid = dht.readHumidity();
+
+  //Convert them to strings
   String tempString = String(temp);
   String humidString = String(humid);
+
+  //create JSON request to send over the wire
   String data = ("{ \"Temperature\": " + tempString + ", \"Humidity\": " + humidString + "}~");
+  
+  //Send the request over the wire to the ESP32 
   Serial.println(data);
-  //5min delay
-  //900000
+ 
+ //do this again every 15 minutes
   delay(900000);
 }
 
 
-
-// // void setup() {
-// //   // put your setup code here, to run once:
-// //   Serial.begin(9600);
-// // }
-
-
-// // void loop() {
-// //   // put your main code here, to run repeatedly:
-// //   //int chk = dht.read11(DHTPIN);
-// //   // Serial.print("Humidity = ");
-// //   // Serial.print(humid);
-// //   // Serial.println("~");
-
-// //   delay(5000);
-// // }
-
-// // this sample code provided by www.programmingboss.com
-// void setup() {
-//   Serial.begin(9600);
-// }
-// void loop() {
-//   Serial.println("Hello Boss");
-//   delay(1500);
-// }
